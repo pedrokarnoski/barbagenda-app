@@ -1,8 +1,15 @@
 import { format } from 'date-fns'
 import { ptBR } from 'date-fns/locale'
-import { Calendar as CalendarIcon, Check, Clock, UserRound } from 'lucide-react'
+import {
+  Calendar as CalendarIcon,
+  Check,
+  CirclePlus,
+  Clock,
+  UserRound,
+} from 'lucide-react'
 import { useState } from 'react'
 
+import { TimeSlots } from '@/components/times-slots'
 import { Button } from '@/components/ui/button'
 import { Calendar } from '@/components/ui/calendar'
 import {
@@ -31,6 +38,79 @@ const clients = [
     label: 'Henrique',
   },
 ]
+
+const morningTimes = [
+  {
+    time: '08:00',
+  },
+  {
+    time: '08:30',
+  },
+  {
+    time: '09:00',
+  },
+  {
+    time: '09:30',
+  },
+  {
+    time: '10:00',
+  },
+  {
+    time: '10:30',
+  },
+  {
+    time: '11:00',
+  },
+  {
+    time: '11:30',
+  },
+]
+
+const afternoonTimes = [
+  {
+    time: '13:00',
+  },
+  {
+    time: '13:30',
+  },
+  {
+    time: '14:00',
+  },
+  {
+    time: '14:30',
+  },
+  {
+    time: '15:00',
+  },
+  {
+    time: '15:30',
+  },
+  {
+    time: '16:00',
+  },
+  {
+    time: '16:30',
+  },
+]
+
+const nightTimes = [
+  {
+    time: '18:00',
+  },
+  {
+    time: '18:30',
+  },
+  {
+    time: '19:00',
+  },
+  {
+    time: '19:30',
+  },
+  {
+    time: '20:00',
+  },
+]
+
 export function NewSchedule() {
   const [date, setDate] = useState<Date>()
   const [open, setOpen] = useState<boolean>(false)
@@ -47,17 +127,18 @@ export function NewSchedule() {
               Novo agendamento
             </h1>
           </div>
-          <p className="pb-8 text-sm text-muted-foreground">
+          <p className="pb-2 text-sm text-muted-foreground">
             Selecione data, horário e informe o nome do cliente para criar o
             agendamento
           </p>
 
-          <div className="flex flex-col space-y-8">
+          <div className="flex flex-col space-y-4">
             <Popover open={open} onOpenChange={setOpen}>
               <PopoverTrigger asChild>
                 <div className="flex flex-col gap-2">
                   <Label className="text-lg">Cliente</Label>
                   <Button
+                    size="lg"
                     variant="outline"
                     role="combobox"
                     aria-expanded={open}
@@ -76,7 +157,14 @@ export function NewSchedule() {
               </PopoverTrigger>
               <PopoverContent className="w-auto p-2">
                 <Command>
+                  <div className="p-4">
+                    <Button className="gap-3">
+                      <CirclePlus />
+                      <Label>Adicionar novo cliente</Label>
+                    </Button>
+                  </div>
                   <CommandInput placeholder="Pesquise aqui..." />
+
                   <CommandList>
                     <CommandEmpty>Nenhum cliente encontrado</CommandEmpty>
                     <CommandGroup>
@@ -112,6 +200,7 @@ export function NewSchedule() {
                   <Label className="text-lg">Data</Label>
                   <Button
                     variant="outline"
+                    size="lg"
                     className="w-full justify-start text-left font-normal hover:bg-black/30"
                   >
                     <CalendarIcon className="mr-2 h-4 w-4 text-primary" />
@@ -135,44 +224,19 @@ export function NewSchedule() {
               </PopoverContent>
             </Popover>
 
-            <div className="flex flex-col gap-2">
+            <div className="flex flex-col gap-2 pb-4">
               <Label className="text-lg">Horários</Label>
 
-              <Label className="text-sm font-normal text-muted-foreground">
-                Manhã
-              </Label>
-
-              <div className="flex gap-2">
-                <Button variant="outline">08:00</Button>
-                <Button variant="outline">09:00</Button>
-                <Button variant="outline">10:00</Button>
-                <Button>11:00</Button>
-              </div>
-
-              <Label className="text-sm font-normal text-muted-foreground">
-                Tarde
-              </Label>
-
-              <div className="flex gap-2">
-                <Button variant="outline">13:00</Button>
-                <Button variant="outline">14:00</Button>
-                <Button variant="outline">15:00</Button>
-                <Button variant="outline">16:00</Button>
-              </div>
-
-              <Label className="text-sm font-normal text-muted-foreground">
-                Noite
-              </Label>
-
-              <div className="flex gap-2">
-                <Button variant="outline">18:00</Button>
-                <Button variant="outline">19:00</Button>
-                <Button variant="outline">20:00</Button>
-                <Button variant="outline">21:00</Button>
-              </div>
+              <TimeSlots label="Manhã" times={morningTimes} />
+              <TimeSlots label="Tarde" times={afternoonTimes} />
+              <TimeSlots label="Noite" times={nightTimes} />
             </div>
 
-            <Button className="gap-2">
+            <Button
+              size="lg"
+              title="Realizar agendamento"
+              className="w-full gap-2 "
+            >
               <Check />
               Agendar
             </Button>

@@ -11,7 +11,7 @@ export function ListAppointments() {
       <div className="grid min-h-[calc(100vh-125px)] grid-cols-1 md:grid-cols-[30%_1fr]">
         <NewSchedule />
 
-        <div className="mx-8 flex flex-col p-6 md:p-10">
+        <div className="ml-8 flex flex-col p-6 md:p-10">
           <Schedule />
         </div>
       </div>
