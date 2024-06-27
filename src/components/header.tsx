@@ -9,7 +9,7 @@ export function Header() {
       <div className="flex h-16 items-center gap-6 px-6">
         <div className="flex items-center gap-3 text-lg text-foreground">
           <Scissors className="h-5 w-5 text-muted-foreground" />
-          <span className="flex flex-row font-leckerli-one text-2xl tracking-wider text-primary">
+          <span className="text-md flex flex-row font-leckerli-one tracking-wider text-primary md:text-2xl">
             Barb<p className="text-muted-foreground">agenda</p>
           </span>
         </div>

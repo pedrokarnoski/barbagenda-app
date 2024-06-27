@@ -21,7 +21,7 @@ import {
   ChevronRight,
   MessageCircleWarning,
   MoreHorizontal,
-  Sunrise,
+  SunDim,
 } from 'lucide-react'
 import { useState } from 'react'
 
@@ -54,7 +54,7 @@ import {
 export type Client = {
   id: number
   name: string
-  phone: string
+  services: string
   time: string
 }
 
@@ -62,67 +62,67 @@ const data: Client[] = [
   {
     id: 1,
     name: 'Pedro Henrique Karnoski',
-    phone: '(46) 99999-9999',
+    services: 'Cabelo',
     time: '08:00',
   },
   {
     id: 2,
     name: 'Henrique',
-    phone: '(46) 99999-9999',
+    services: 'Cabelo',
     time: '09:00',
   },
   {
     id: 3,
     name: 'Karnoski',
-    phone: '(46) 99999-9999',
+    services: 'Cabelo',
     time: '10:00',
   },
   {
     id: 4,
     name: 'Karnoski',
-    phone: '(46) 99999-9999',
+    services: 'Cabelo • Barba',
     time: '10:00',
   },
   {
     id: 5,
     name: 'Karnoski',
-    phone: '(46) 99999-9999',
+    services: 'Cabelo • Barba',
     time: '10:00',
   },
   {
     id: 6,
     name: 'Karnoski',
-    phone: '(46) 99999-9999',
+    services: 'Cabelo • Barba',
     time: '10:00',
   },
   {
     id: 7,
     name: 'Karnoski',
-    phone: '(46) 99999-9999',
+    services: 'Pézinho',
     time: '10:00',
   },
   {
     id: 8,
     name: 'Karnoski',
-    phone: '(46) 99999-9999',
+    services: 'Cabelo • Barba',
     time: '10:00',
   },
   {
     id: 9,
     name: 'Karnoski',
-    phone: '(46) 99999-9999',
+    services: 'Cabelo • Barba',
     time: '10:00',
   },
   {
     id: 10,
     name: 'Karnoski',
-    phone: '(46) 99999-9999',
+    services: 'Cabelo • Barba',
     time: '10:00',
   },
   {
     id: 11,
     name: 'Karnoski',
-    phone: '(46) 99999-9999',
+    services: 'Cabelo',
     time: '10:00',
   },
 ]
@@ -138,11 +138,11 @@ export const columns: ColumnDef<Client>[] = [
     ),
   },
   {
-    accessorKey: 'phone',
-    header: 'Telefone',
+    accessorKey: 'services',
+    header: 'Serviços',
     cell: ({ row }) => (
       <div>
-        <Label>{row.getValue('phone')}</Label>
+        <Label>{row.getValue('services')}</Label>
       </div>
     ),
   },
@@ -162,7 +162,7 @@ export const columns: ColumnDef<Client>[] = [
     },
     cell: ({ row }) => (
       <div className="flex flex-row items-center gap-3">
-        <Sunrise className="h-5 w-5 text-yellow-200" />
+        <SunDim className="h-5 w-5 text-yellow-200" />
         <Label>{row.getValue('time')}</Label>
       </div>
     ),
@@ -225,7 +225,7 @@ export function Schedule() {
     },
     initialState: {
       pagination: {
-        pageSize: 8,
+        pageSize: 10,
       },
     },
   })

@@ -3,8 +3,11 @@ import { ptBR } from 'date-fns/locale'
 import {
   Calendar as CalendarIcon,
   Check,
-  CirclePlus,
   Clock,
+  Moon,
+  Plus,
+  Sun,
+  SunDim,
   UserRound,
 } from 'lucide-react'
 import { useState } from 'react'
@@ -21,6 +24,14 @@ import {
   CommandList,
 } from '@/components/ui/command'
 import { Label } from '@/components/ui/label'
+import {
+  MultiSelector,
+  MultiSelectorContent,
+  MultiSelectorInput,
+  MultiSelectorItem,
+  MultiSelectorList,
+  MultiSelectorTrigger,
+} from '@/components/ui/multi-select'
 import {
   Popover,
   PopoverContent,
@@ -111,10 +122,17 @@ const nightTimes = [
   },
 ]
 
+const services = [
+  { label: 'Cabelo', value: 'cabelo' },
+  { label: 'Barba', value: 'barba' },
+  { label: 'Pézinho', value: 'pezinho' },
+]
+
 export function NewSchedule() {
   const [date, setDate] = useState<Date>()
   const [open, setOpen] = useState<boolean>(false)
   const [value, setValue] = useState<string>('')
+  const [service, setService] = useState<string[]>([])
 
   return (
     <div className="flex items-center">
@@ -155,11 +173,11 @@ export function NewSchedule() {
                   </Button>
                 </div>
               </PopoverTrigger>
-              <PopoverContent className="w-auto p-2">
+              <PopoverContent className="flex w-full p-2">
                 <Command>
                   <div className="p-4">
-                    <Button className="gap-3">
-                      <CirclePlus />
+                    <Button className="flex w-full gap-3" variant="outline">
+                      <Plus className="h-4 w-4" />
                       <Label>Adicionar novo cliente</Label>
                     </Button>
                   </div>
@@ -224,12 +242,50 @@ export function NewSchedule() {
               </PopoverContent>
             </Popover>
 
+            <div>
+              <Label className="text-lg">Serviços</Label>
+
+              <MultiSelector
+                values={service}
+                onValuesChange={setService}
+                loop={false}
+              >
+                <MultiSelectorTrigger>
+                  <MultiSelectorInput placeholder="Selecione os serviços" />
+                </MultiSelectorTrigger>
+                <MultiSelectorContent>
+                  <MultiSelectorList>
+                    {services.map((option, i) => (
+                      <MultiSelectorItem key={i} value={option.label}>
+                        {option.label}
+                      </MultiSelectorItem>
+                    ))}
+                  </MultiSelectorList>
+                </MultiSelectorContent>
+              </MultiSelector>
+            </div>
+
             <div className="flex flex-col gap-2 pb-4">
               <Label className="text-lg">Horários</Label>
 
-              <TimeSlots label="Manhã" times={morningTimes} />
-              <TimeSlots label="Tarde" times={afternoonTimes} />
-              <TimeSlots label="Noite" times={nightTimes} />
+              <TimeSlots
+                label="Manhã"
+                times={morningTimes}
+                icon={SunDim}
+                iconColor="text-yellow-200"
+              />
+              <TimeSlots
+                label="Tarde"
+                times={afternoonTimes}
+                icon={Sun}
+                iconColor="text-yellow-400"
+              />
+              <TimeSlots
+                label="Noite"
+                times={nightTimes}
+                icon={Moon}
+                iconColor="text-blue-300"
+              />
             </div>
 
             <Button
