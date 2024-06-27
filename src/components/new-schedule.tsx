@@ -5,7 +5,6 @@ import {
   Check,
   CirclePlus,
   Clock,
-  Trash,
   UserRound,
 } from 'lucide-react'
 import { useState } from 'react'
