@@ -167,7 +167,7 @@ const MultiSelectorTrigger = forwardRef<
     <div
       ref={ref}
       className={cn(
-        'flex flex-wrap items-center gap-1 rounded-lg border border-muted bg-background p-1 py-3',
+        'flex flex-wrap items-center gap-1 rounded-lg border border-muted bg-background p-1 py-3 hover:bg-black/30',
         className,
       )}
       {...props}
@@ -293,7 +293,10 @@ const MultiSelectorItem = forwardRef<
       )}
       onMouseDown={mousePreventDefault}
     >
-      {isIncluded && <Check className="h-4 w-4" />}
+      <Check
+        className={cn('h-4 w-4', isIncluded ? 'opacity-100' : 'opacity-0')}
+      />
+
       {children}
     </CommandItem>
   )

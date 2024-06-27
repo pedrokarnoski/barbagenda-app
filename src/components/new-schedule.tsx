@@ -10,7 +10,7 @@ import {
   SunDim,
   UserRound,
 } from 'lucide-react'
-import { useState } from 'react'
+import { SetStateAction, useState } from 'react'
 
 import { TimeSlots } from '@/components/times-slots'
 import { Button } from '@/components/ui/button'
@@ -37,6 +37,7 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from '@/components/ui/popover'
+import { Separator } from '@/components/ui/separator'
 import { cn } from '@/lib/utils'
 
 const clients = [
@@ -173,16 +174,17 @@ export function NewSchedule() {
                   </Button>
                 </div>
               </PopoverTrigger>
-              <PopoverContent className="flex w-full p-2">
+
+              <PopoverContent className="p-1">
                 <Command>
+                  <CommandInput placeholder="Pesquise aqui..." />
                   <div className="p-4">
                     <Button className="flex w-full gap-3" variant="outline">
                       <Plus className="h-4 w-4" />
                       <Label>Adicionar novo cliente</Label>
                     </Button>
                   </div>
-                  <CommandInput placeholder="Pesquise aqui..." />
-
+                  <Separator className="mb-2" />
                   <CommandList>
                     <CommandEmpty>Nenhum cliente encontrado</CommandEmpty>
                     <CommandGroup>
@@ -190,7 +192,7 @@ export function NewSchedule() {
                         <CommandItem
                           key={client.value}
                           value={client.value}
-                          onSelect={(currentValue) => {
+                          onSelect={(currentValue: SetStateAction<string>) => {
                             setValue(currentValue === value ? '' : currentValue)
                             setOpen(false)
                           }}

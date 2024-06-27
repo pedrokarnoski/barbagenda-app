@@ -1,5 +1,3 @@
-import { Sun } from 'lucide-react'
-
 import { Label } from '@/components/ui/label'
 import { Toggle } from '@/components/ui/toggle'
 
